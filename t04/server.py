@@ -1,11 +1,13 @@
+from http.server import HTTPServer, SimpleHTTPRequestHandler
 
-from http.server import BaseHTTPRequestHandler
-from http.server import HTTPServer
+def run(server_class=HTTPServer, handler_class=SimpleHTTPRequestHandler):
+    """Entrypoint for python server"""
+    server_address = ("0.0.0.0", 8000)
+    httpd = server_class(server_address, handler_class)
+    print("launching server...")
+    httpd.serve_forever()
 
-def run(server_class=HTTPServer, handler_class=BaseHTTPRequestHandler):
-  server_address = ('', 8000)
-  httpd = server_class(server_address, handler_class)
-  try:
-      httpd.serve_forever()
-  except KeyboardInterrupt:
-      httpd.server_close()
+
+
+if __name__ == "__main__":
+    run()
